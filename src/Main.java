@@ -1,14 +1,32 @@
+import Prototype.Car;
 import Strategy.BubbleSort;
 import Strategy.MergeSort;
 import Strategy.OrderedList;
 import Visitor.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        testStrategy();
+        testPrototype();
+    }
+
+    public static void testPrototype() {
+        List<Integer> mileage = new ArrayList<>();
+        mileage.add(10);
+        mileage.add(20);
+        Car originalCar = new Car("bentley", mileage);
+        Car shallowClone = originalCar.clone();
+        Car deepClone = new Car(originalCar);
+
+        List<Integer> clonedMileage = shallowClone.getMileage();
+        System.out.println(shallowClone.getName() + " " + clonedMileage);
+        mileage.set(0, 50);
+        System.out.println(clonedMileage.get(0).equals(50));
+
+        System.out.println(deepClone.getMileage().get(0).equals(10));
     }
 
     public static void testStrategy() {
