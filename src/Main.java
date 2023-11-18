@@ -1,3 +1,4 @@
+import ChainOfResponsibility.*;
 import Prototype.Car;
 import Strategy.BubbleSort;
 import Strategy.MergeSort;
@@ -10,7 +11,18 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        testPrototype();
+        testChainOfResponsibility();
+    }
+
+    public static void testChainOfResponsibility() {
+        Employee validEmployee = new Employee(1, "Snehasish", "Roy", 100, 100, 20);
+        Validator validatorChain = new EmployeeIdValidator()
+                .setNextValidator(new AgeValidator()
+                        .setNextValidator(new NameValidator()));
+        System.out.println(validatorChain.isValid(validEmployee));
+
+        Employee invalidEmployee = new Employee(1, "Snehasish", "Roy", 100, 100, 10);
+        System.out.println(validatorChain.isValid(invalidEmployee));
     }
 
     public static void testPrototype() {
