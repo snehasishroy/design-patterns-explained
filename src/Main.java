@@ -1,4 +1,7 @@
 import ChainOfResponsibility.*;
+import Observer.Job;
+import Observer.JobDispatcher;
+import Observer.JobExecutor;
 import Prototype.Car;
 import Strategy.BubbleSort;
 import Strategy.MergeSort;
@@ -11,7 +14,19 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        testChainOfResponsibility();
+        testObserver();
+    }
+
+    public static void testObserver() {
+        JobExecutor executor1 = new JobExecutor();
+        JobExecutor executor2 = new JobExecutor();
+        JobDispatcher jobDispatcher = new JobDispatcher();
+        jobDispatcher.addObserver(executor1);
+        jobDispatcher.addObserver(executor2);
+        jobDispatcher.notifyObservers(new Job("job1"));
+
+        jobDispatcher.removeObserver(executor1);
+        jobDispatcher.notifyObservers(new Job("job2"));
     }
 
     public static void testChainOfResponsibility() {
