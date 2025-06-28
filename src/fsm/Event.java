@@ -1,5 +1,5 @@
 package fsm;
 
-public interface State {
+public interface Event {
     String getName();
 }
